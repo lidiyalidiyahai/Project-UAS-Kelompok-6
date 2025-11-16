@@ -64,3 +64,71 @@ int main() {
         cin >> pilih;
 
         switch (pilih) {
+ // INPUT DATA
+        case 1: {
+            system("cls");
+
+            cout << "\nMasukkan jumlah mahasiswa: ";
+            cin >> jumlah;
+
+            for (int i = 0; i < jumlah; i++) {
+                cout << "\nData ke-" << i + 1 << endl;
+
+                cout << "Nama  : ";
+                cin.ignore();
+                getline(cin, nama[i]);
+
+                cout << "NIM   : ";
+                getline(cin, nim[i]);
+
+                cout << "Nilai Tugas : ";
+                cin >> tugas[i];
+
+                cout << "Nilai UTS   : ";
+                cin >> uts[i];
+
+                cout << "Nilai UAS   : ";
+                cin >> uas[i];
+
+                rata[i] = hitungRata(tugas[i], uts[i], uas[i]);
+                grade[i] = tentukanGrade(rata[i]);
+            }
+            break;
+        }
+
+        // TAMPILKAN SEMUA
+        case 2:
+            system("cls");
+            tampilData(jumlah, nama, nim, tugas, uts, uas, rata, grade);
+            break;
+
+        // CARI DATA
+        case 3: {
+            system("cls");
+
+            string cariNIM;
+            bool ditemukan = false;
+
+            cout << "\nMasukkan NIM yang dicari: ";
+            cin.ignore();
+            getline(cin, cariNIM);
+
+            string lowerCari = lowerStr(cariNIM);
+
+            for (int i = 0; i < jumlah; i++) {
+                if (lowerStr(nim[i]) == lowerCari) {
+                    cout << "\nData ditemukan!";
+                    cout << "\nNama      : " << nama[i];
+                    cout << "\nNIM       : " << nim[i];
+                    cout << "\nRata-rata : " << rata[i];
+                    cout << "\nGrade     : " << grade[i] << endl;
+                    ditemukan = true;
+                    break;
+                }
+            }
+
+            if (!ditemukan)
+                cout << "\nData tidak ditemukan!\n";
+
+            break;
+        }
