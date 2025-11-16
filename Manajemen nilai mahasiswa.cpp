@@ -132,3 +132,100 @@ int main() {
 
             break;
         }
+
+        // UPDATE DATA
+        case 4: {
+            system("cls");
+
+            string cariNIM;
+            bool ditemukan = false;
+
+            cout << "\nMasukkan NIM data yang mau diupdate: ";
+            cin.ignore();
+            getline(cin, cariNIM);
+
+            for (int i = 0; i < jumlah; i++) {
+                if (lowerStr(nim[i]) == lowerStr(cariNIM)) {
+                    cout << "\n=== UPDATE DATA ===\n";
+
+                    cout << "Nama baru  : ";
+                    getline(cin, nama[i]);
+
+                    cout << "NIM baru   : ";
+                    getline(cin, nim[i]);
+
+                    cout << "Nilai Tugas : ";
+                    cin >> tugas[i];
+                    cout << "Nilai UTS   : ";
+                    cin >> uts[i];
+                    cout << "Nilai UAS   : ";
+                    cin >> uas[i];
+
+                    rata[i] = hitungRata(tugas[i], uts[i], uas[i]);
+                    grade[i] = tentukanGrade(rata[i]);
+
+                    cout << "\nData berhasil diupdate!\n";
+                    ditemukan = true;
+                    break;
+                }
+            }
+
+            if (!ditemukan)
+                cout << "\nData tidak ditemukan!\n";
+
+            break;
+        }
+
+        // DELETE DATA
+        case 5: {
+            system("cls");
+
+            string hapusNIM;
+            bool ditemukan = false;
+
+            cout << "\nMasukkan NIM yang akan dihapus: ";
+            cin.ignore();
+            getline(cin, hapusNIM);
+
+            for (int i = 0; i < jumlah; i++) {
+                if (lowerStr(nim[i]) == lowerStr(hapusNIM)) {
+
+                    for (int j = i; j < jumlah - 1; j++) {
+                        nama[j] = nama[j + 1];
+                        nim[j] = nim[j + 1];
+                        tugas[j] = tugas[j + 1];
+                        uts[j] = uts[j + 1];
+                        uas[j] = uas[j + 1];
+                        rata[j] = rata[j + 1];
+                        grade[j] = grade[j + 1];
+                    }
+
+                    jumlah--;
+                    cout << "\nData berhasil dihapus!\n";
+                    ditemukan = true;
+                    break;
+                }
+            }
+
+            if (!ditemukan)
+                cout << "\nData tidak ditemukan!\n";
+
+            break;
+        }
+
+        case 6:
+            cout << "\nTerima kasih!\n";
+            return 0;
+
+        default:
+            cout << "\nPilihan tidak valid!\n";
+        }
+
+        cout << "\nKembali ke menu? (y/n): ";
+        cin >> ulang;
+        ulang = tolower(ulang);
+
+    } while (ulang == 'y');
+
+    return 0;
+}
