@@ -50,7 +50,7 @@ int main() {
     char ulang;
 
     do {
-        system("cls"); // bersihkan layar menu
+        system("cls"); // duntuk bersihkan layar menu
 
         cout << "\n===== SISTEM MANAJEMEN NILAI MAHASISWA =====";
         cout << "\n1. Input Data Mahasiswa";
